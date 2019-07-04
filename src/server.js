@@ -23,26 +23,16 @@ const handleListening = () => {
 
 const server = app.listen(PORT, handleListening);
 
-// #003. 아래 io까지 하고
-// localhost:4000/socket.io/socket.io.js를 해보면 이상한 페이지가뜸
-const io = socketIO(server);
+const io = socketIO(server); // web-socket프로토콜, http서버 위에 올림
 
-// 매 연결할때마다 소켓의 id를 push할거임
-let sockets = [];
+// 이벤트 2개 만들거임
+// 1. 유저가 메시지를 보내는 이벤트
+// 2. 다른 유저가 join하는 이벤트
 
-// #004. 이거하고 localhost 가봐도 별거 없음, 클라이언트로 가서 뭔가해줘야함 -> home.pug로 이동
-// socket이라는 인자는 연결된 것에 대한 정보를 얻을 수 있음
-// 서버를 잠시 껐다가 다시 키면 아까 연결해둔 3개의 클라이언트에 대해 자동으로 다시 연결됨
-// 그래서 sombody connected가 3개가 뜸
-// 그 이유는 아까 크롬창에서 실행한 io("/")이 항상 server의 이벤트를 듣고 있기 때문
-
-// io.on("connection", socket => console.log("Somebody Connected"));
-// io.on("connection", socket => console.log(socket));
+// 벡엔드에서 프론트로 이벤트를 보낼거임 server.js가 서버, index.js가 클라이언트.
 io.on("connection", socket => {
-  sockets.push(socket.id);
+  // 클라이언트가 연결되면 connection이라는 이벤트를 발생시킴
+  socket.emit("helloooo"); // 소켓이연결되면 helloooo이벤트를 발생시킴
+  // 이벤트를 발생시킴, 서버는 이벤트를 발생시키고, 클라이언트는 이벤트를 리스닝함
+  // emit("이벤트이름");
 });
-
-// 이렇게 하면 sockets[] 배열 전체가 3번출력되는데 왜그러지??
-setInterval(() => console.log(sockets), 1000);
-
-// 위에까지 하고 브라우저에서 일일이 io("/")를 하지 않기위해 index.js로 감
