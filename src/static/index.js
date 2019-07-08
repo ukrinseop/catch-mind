@@ -1,22 +1,23 @@
 // eslint-disable-next-line no-undef
 const socket = io("/");
 
-socket.on("helloooo", () => console.log("Somebody said Hello"));
-
-socket.emit("helloGuys");
-
-function sendMessage(message) {
-  socket.emit("newMessage", { message: message });
-  console.log(`You : ${message}`);
+function sendMessage(msg) {
+  socket.emit("newMsg", { msg });
+  console.log(`you : ${msg}`);
 }
 
-function setNickname(nickname) {
-  socket.emit("setNickname", { nickname });
+function setNickName(nickname) {
+  socket.emit("setNickName", { nickname });
+  console.log(`Nickname set : ${nickname}`);
 }
 
 function handleMessageNotif(data) {
-  const { message, nickname } = data;
-  console.log(`${nickname} : ${message}`);
+  const { msg, nickname } = data;
+  console.log(`${nickname} : ${msg}`);
 }
 
-socket.on("messageNotif", handleMessageNotif);
+socket.on("msgNotif", handleMessageNotif);
+
+{
+  /* <script type="text/javascript" src="<c:url value="/js/jquery-1.6.min.js"/>  */
+}

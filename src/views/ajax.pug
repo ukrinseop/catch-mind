@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        title Document
+        script(id ="jquery" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js")
+        script(src="/ajax.js")
+        style(type="text/css").
+            .on {
+                background-color: blue;
+                font-weight: bold;
+                font-size: 50px;
+            }
+            .off {
+                background-color: red;
+                font-weight: normal;
+                font-size: 20px;
+            }
+            .normal {
+                background-color: green;
+                font-weight: bold;
+                font-size: 20px;
+            }
+    body
+        h1 Hello From the OUTSIDE
+        form(method="get" id="iform")
+            |ID : 
+            input(type="text", id="txtID")
+            br
+            |PW :
+            input(type="text", id="txtPW")
+            br
+            input(type="submit", id="f", value="submit", name="f")
+        button(onclick="getValue();")|input(getValue())
+        br
+        br
+
+        div#getText 뭐있냐 <strong>스토롱이야</strong>??
+        button(onclick="getText();") input(getText())
+        br
+        br
+        br
+
+        div(id="toggleDiv") 토글체크샘플
+        button(id="toggle") 토글버튼
+    
+        
+
+
